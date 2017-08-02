@@ -37,11 +37,27 @@ describe('#handleRead', () => {
 })
 
 describe('#handleSelected', () => {
-    it('updates the state of a message to selected', () => {
+    it('updates the state of selected when the message property did not exist', () => {
         const div = document.createElement('div')
         const app = shallow(<App />, div)
         app.instance().handleSelected(app.state().messages[2])
         expect(app.state().messages[2].selected).toBe(true)
+    })
+
+    it('updates the state of selected to true when selected is false', () => {
+        const div = document.createElement('div')
+        const app = shallow(<App />, div)
+        app.state().messages[2].selected = false
+        app.instance().handleSelected(app.state().messages[2])
+        expect(app.state().messages[2].selected).toBe(true)
+    })
+
+    it('updates the state of selected to false when it is true', () => {
+        const div = document.createElement('div')
+        const app = shallow(<App />, div)
+        app.state().messages[2].selected = true
+        app.instance().handleSelected(app.state().messages[2])
+        expect(app.state().messages[2].selected).toBe(false)
     })
 })
 

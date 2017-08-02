@@ -48,7 +48,7 @@ describe('#messageSelected', () => {
 
         const div = document.createElement('div')
         const messageComponent = shallow(<Message message={messageObject}/>, div)
-        expect(messageComponent.instance().messageSelected).toBe(undefined)
+        expect(messageComponent.instance().messageSelected).toBe('')
     });
 
     it('returns selected when selected is true', () => {
@@ -129,5 +129,34 @@ describe('#labels', () => {
         const messageComponent = shallow(<Message message={messageObject}/>, div)
         expect(messageComponent.instance().labels.length).toBe(0)
     })
+})
 
+describe('#starred', () => {
+  it('returns star fa fa-star when the message is starred', () => {
+    const messageObject = {
+        'id': 7,
+        'subject': 'We need to index the mobile PCI bus!',
+        'read': true,
+        'starred': true,
+        'labels': []
+    }
+
+    const div = document.createElement('div')
+    const messageComponent = shallow(<Message message={messageObject}/>, div)
+    expect(messageComponent.instance().starred).toBe('star fa fa-star')
+  })
+
+  it('returns star fa fa-star-o when the message is not starred', () => {
+    const messageObject = {
+        'id': 7,
+        'subject': 'We need to index the mobile PCI bus!',
+        'read': true,
+        'starred': false,
+        'labels': []
+    }
+
+    const div = document.createElement('div')
+    const messageComponent = shallow(<Message message={messageObject}/>, div)
+    expect(messageComponent.instance().starred).toBe('star fa fa-star-o')
+  })
 })

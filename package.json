@@ -24,5 +24,8 @@
     "test-e2e": "codeceptjs run --steps",
     "test-unit": "CI=true react-scripts test --env=jsdom",
     "test-unit-watch": "react-scripts test --env=jsdom"
+  },
+  "devDependencies": {
+    "codeceptjs": "^1.0.0"
   }
 }

@@ -1441,7 +1441,7 @@ codeceptjs-webdriverio@^1.1.0:
     codeceptjs "*"
     webdriverio "*"
 
-codeceptjs@*:
+codeceptjs@*, codeceptjs@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/codeceptjs/-/codeceptjs-1.0.0.tgz#b07abfe89dda0f47fba5aabddf7cb2b34f859cd3"
   dependencies:
@@ -5517,6 +5517,13 @@ react-scripts@1.0.10:
     whatwg-fetch "2.0.3"
   optionalDependencies:
     fsevents "1.1.2"
+
+react-test-renderer@^15.6.1:
+  version "15.6.1"
+  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-15.6.1.tgz#026f4a5bb5552661fd2cc4bbcd0d4bc8a35ebf7e"
+  dependencies:
+    fbjs "^0.8.9"
+    object-assign "^4.1.0"
 
 react@^15.6.1:
   version "15.6.1"

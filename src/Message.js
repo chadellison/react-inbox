@@ -7,13 +7,19 @@ class Message extends Component {
     }
 
     get messageSelected() {
-        if (this.props.message.selected !== undefined) {
+        if (this.props.message.selected) {
             return 'selected'
+        } else {
+          return ''
         }
     }
 
     get messageChecked() {
-        return this.props.message.selected !== undefined ? 'checked' : ''
+      if(this.props.message.selected) {
+        return 'checked'
+      } else {
+        return ''
+      }
     }
 
     get labels() {
@@ -35,7 +41,7 @@ class Message extends Component {
                 <div className="col-xs-1">
                     <div className="row">
                         <div className="col-xs-2">
-                            <input type="checkbox" checked={`${this.messageChecked}`}/>
+                            <input onClick={() => this.props.handleSelected(this.props.message)} type="checkbox" checked={`${this.messageChecked}`} />
                         </div>
                         <div className="col-xs-2">
                             <i className={this.starred} onClick={() => this.props.handleStarred(this.props.message)}></i>

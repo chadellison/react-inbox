@@ -12,6 +12,7 @@ class App extends Component {
         }
 
         this.handleStarred = this.handleStarred.bind(this)
+        this.handleSelected = this.handleSelected.bind(this)
     }
 
     handleRead(message) {
@@ -23,14 +24,18 @@ class App extends Component {
     }
 
     handleSelected(message) {
-        if(message.selected === undefined) {
-            let updatedMessages = this.state.messages
-            updatedMessages[message.id - 1].selected = true
+        let updatedMessages = this.state.messages
 
-            this.setState({
-                messages: updatedMessages
-            })
+        if(!message.selected) {
+            updatedMessages[message.id - 1].selected = true
+        } else {
+          updatedMessages[message.id - 1].selected = false
         }
+
+        this.setState({
+            messages: updatedMessages
+        })
+
     }
 
     handleStarred(message) {
@@ -45,7 +50,7 @@ class App extends Component {
         return (
             <div className="App">
                 <Toolbar className="Toolbar"/>
-                <Messages messages={this.state.messages} handleStarred={this.handleStarred}/>
+                <Messages messages={this.state.messages} handleStarred={this.handleStarred} handleSelected={this.handleSelected}/>
             </div>
         );
     }
