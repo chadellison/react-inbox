@@ -72,3 +72,36 @@ describe('#handleStarred', () => {
         expect(app.state().messages[3].starred).toBe(true)
     })
 })
+
+describe('#handleSelectAll', () => {
+  it('updates the state of all the messages to selected if not all of them are selected', () => {
+    const div = document.createElement('div')
+    const app = shallow(<App />, div)
+
+    app.instance().handleSelectAll()
+    expect(app.state().messages[0].selected).toBe(true)
+    expect(app.state().messages[1].selected).toBe(true)
+    expect(app.state().messages[2].selected).toBe(true)
+    expect(app.state().messages[3].selected).toBe(true)
+    expect(app.state().messages[4].selected).toBe(true)
+    expect(app.state().messages[5].selected).toBe(true)
+    expect(app.state().messages[6].selected).toBe(true)
+    expect(app.state().messages[7].selected).toBe(true)
+  })
+
+  it('updates the state of all the messages to unselected if all of them are selected', () => {
+    const div = document.createElement('div')
+    const app = shallow(<App />, div)
+
+    app.instance().handleSelectAll()
+    app.instance().handleSelectAll
+    expect(app.state().messages[0].selected).toBe(false)
+    expect(app.state().messages[1].selected).toBe(false)
+    expect(app.state().messages[2].selected).toBe(false)
+    expect(app.state().messages[3].selected).toBe(false)
+    expect(app.state().messages[4].selected).toBe(false)
+    expect(app.state().messages[5].selected).toBe(false)
+    expect(app.state().messages[6].selected).toBe(false)
+    expect(app.state().messages[7].selected).toBe(false)
+  })
+})
