@@ -20,6 +20,17 @@ class App extends Component {
         })
     }
 
+    handleSelected(message) {
+        if(message.selected === undefined) {
+            let updatedMessages = this.state.messages
+            updatedMessages[message.id - 1].selected = true
+
+            this.setState({
+                messages: updatedMessages
+            })
+        }
+    }
+
     render() {
         return (
             <div className="App">

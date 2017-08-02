@@ -35,3 +35,12 @@ describe('#handleRead', () => {
 
     })
 })
+
+describe('#handleSelected', () => {
+    it('updates the state of a message to selected', () => {
+        const div = document.createElement('div')
+        const app = shallow(<App />, div)
+        app.instance().handleSelected(app.state().messages[2])
+        expect(app.state().messages[2].selected).toBe(true)
+    })
+})
