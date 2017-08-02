@@ -5,7 +5,7 @@ class Messages extends Component {
 
     get messages() {
         return(this.props.messages.map((message, i) =>{
-            return (<Message key={i} message={message}/>)
+            return (<Message key={i} message={message} handleStarred={this.props.handleStarred} />)
         }))
     }
 

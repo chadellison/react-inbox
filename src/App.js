@@ -10,6 +10,8 @@ class App extends Component {
         this.state = {
             messages: seedMessages
         }
+
+        this.handleStarred = this.handleStarred.bind(this)
     }
 
     handleRead(message) {
@@ -43,7 +45,7 @@ class App extends Component {
         return (
             <div className="App">
                 <Toolbar className="Toolbar"/>
-                <Messages messages={this.state.messages}/>
+                <Messages messages={this.state.messages} handleStarred={this.handleStarred}/>
             </div>
         );
     }

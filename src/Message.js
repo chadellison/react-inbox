@@ -38,7 +38,7 @@ class Message extends Component {
                             <input type="checkbox" checked={`${this.messageChecked}`}/>
                         </div>
                         <div className="col-xs-2">
-                            <i className={this.starred}></i>
+                            <i className={this.starred} onClick={() => this.props.handleStarred(this.props.message)}></i>
                         </div>
                     </div>
                 </div>
