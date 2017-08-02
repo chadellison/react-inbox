@@ -14,11 +14,17 @@ class App extends Component {
         this.handleStarred = this.handleStarred.bind(this)
         this.handleSelected = this.handleSelected.bind(this)
         this.handleSelectAll = this.handleSelectAll.bind(this)
+        this.handleRead = this.handleRead.bind(this)
     }
 
-    handleRead(message) {
+    handleRead(value) {
         let updatedMessages = this.state.messages
-        updatedMessages[message.id - 1].read = true
+        updatedMessages.forEach((message) => {
+          if (message.selected) {
+            message.read = value
+          }
+        })
+
         this.setState({
             messages: updatedMessages
         })
@@ -68,7 +74,11 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <Toolbar className="Toolbar" handleSelectAll={this.handleSelectAll}/>
+                <Toolbar
+                  className="Toolbar"
+                  handleSelectAll={this.handleSelectAll}
+                  handleRead={this.handleRead}
+                />
                 <Messages messages={this.state.messages} handleStarred={this.handleStarred} handleSelected={this.handleSelected}/>
             </div>
         );

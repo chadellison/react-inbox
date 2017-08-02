@@ -27,11 +27,21 @@ it('passes messages to Messages Component via props', () => {
 })
 
 describe('#handleRead', () => {
-    it('updates the state of a message to read', () => {
+    it('updates the state of all selected messages to read when true is passed in', () => {
         const div = document.createElement('div')
         const  app = shallow(<App />, div)
-        app.instance().handleRead(app.state().messages[2])
-        expect(app.state().messages[2].read).toBe(true)
+        app.instance().handleRead(true)
+        expect(app.state().messages[1].read).toBe(true)
+        expect(app.state().messages[3].read).toBe(true)
+
+    })
+
+    it('updates the state of all selected messages to unread when false is passed in', () => {
+        const div = document.createElement('div')
+        const  app = shallow(<App />, div)
+        app.instance().handleRead(false)
+        expect(app.state().messages[1].read).toBe(false)
+        expect(app.state().messages[3].read).toBe(false)
 
     })
 })
