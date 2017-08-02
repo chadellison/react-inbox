@@ -44,3 +44,15 @@ describe('#handleSelected', () => {
         expect(app.state().messages[2].selected).toBe(true)
     })
 })
+
+describe('#handleStarred', () => {
+    it('updates the state of the message to starred', () => {
+        const div = document.createElement('div')
+        const app = shallow(<App />, div)
+        app.instance().handleStarred(app.state().messages[2])
+        expect(app.state().messages[2].starred).toBe(false)
+
+        app.instance().handleStarred(app.state().messages[3])
+        expect(app.state().messages[3].starred).toBe(true)
+    })
+})

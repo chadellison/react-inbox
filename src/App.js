@@ -31,6 +31,14 @@ class App extends Component {
         }
     }
 
+    handleStarred(message) {
+        let updatedMessages = this.state.messages
+        updatedMessages[message.id - 1].starred = !message.starred
+        this.setState({
+            message: updatedMessages
+        })
+    }
+
     render() {
         return (
             <div className="App">
