@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 
 class Message extends Component {
 
+    // constructor() {
+    //     this.state = {
+    //         unread: true
+    //     }
+    // }
+
     render() {
         return(
             <div className="row message unread">
