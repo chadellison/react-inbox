@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 
 
 class Toolbar extends Component {
-
-
     render() {
         return (<div className="row toolbar">
             <div className="col-md-12">
                 <p className="pull-right">
-                    <span className="badge badge">2</span>
+                    <span className="badge badge">{this.props.unReadCount}</span>
                     unread messages
                 </p>
 
@@ -38,7 +36,7 @@ class Toolbar extends Component {
                     <option value="gschool">gschool</option>
                 </select>
 
-                <button className="btn btn-default">
+                <button onClick={this.props.handleDelete} className="btn btn-default">
                     <i className="fa fa-trash-o"></i>
                 </button>
             </div>

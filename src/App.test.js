@@ -4,6 +4,20 @@ import App from './App';
 import Messages from './Messages'
 import { shallow } from 'enzyme';
 
+beforeEach(() => {
+  const div = document.createElement('div')
+  const app = shallow(<App />, div)
+
+  app.state().messages.forEach((message, index) => {
+    if(index % 2 === 0) {
+      message.selected = true
+    } else {
+      message.selected = false
+    }
+  })
+
+})
+
 it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<App />, div);
@@ -19,7 +33,6 @@ it('has an initial state of 8 messages', () => {
 
 it('passes messages to Messages Component via props', () => {
     const div = document.createElement('div');
-
     const app = shallow(<App />, div);
     const messageList = app.find(Messages.name)
     expect(messageList.props().messages.length).toBe(8)
@@ -31,8 +44,8 @@ describe('#handleRead', () => {
         const div = document.createElement('div')
         const  app = shallow(<App />, div)
         app.instance().handleRead(true)
-        expect(app.state().messages[1].read).toBe(true)
-        expect(app.state().messages[3].read).toBe(true)
+        expect(app.state().messages[0].read).toBe(true)
+        expect(app.state().messages[2].read).toBe(true)
 
     })
 
@@ -40,8 +53,8 @@ describe('#handleRead', () => {
         const div = document.createElement('div')
         const  app = shallow(<App />, div)
         app.instance().handleRead(false)
-        expect(app.state().messages[1].read).toBe(false)
-        expect(app.state().messages[3].read).toBe(false)
+        expect(app.state().messages[0].read).toBe(false)
+        expect(app.state().messages[2].read).toBe(false)
 
     })
 })
@@ -50,8 +63,9 @@ describe('#handleSelected', () => {
     it('updates the state of selected when the message property did not exist', () => {
         const div = document.createElement('div')
         const app = shallow(<App />, div)
-        app.instance().handleSelected(app.state().messages[2])
-        expect(app.state().messages[2].selected).toBe(true)
+        app.state().messages[1].selected = undefined
+        app.instance().handleSelected(app.state().messages[1])
+        expect(app.state().messages[1].selected).toBe(true)
     })
 
     it('updates the state of selected to true when selected is false', () => {
@@ -102,9 +116,8 @@ describe('#handleSelectAll', () => {
   it('updates the state of all the messages to unselected if all of them are selected', () => {
     const div = document.createElement('div')
     const app = shallow(<App />, div)
-
+    app.state().messages.forEach((message) => message.selected = true)
     app.instance().handleSelectAll()
-    app.instance().handleSelectAll
     expect(app.state().messages[0].selected).toBe(false)
     expect(app.state().messages[1].selected).toBe(false)
     expect(app.state().messages[2].selected).toBe(false)
@@ -113,5 +126,20 @@ describe('#handleSelectAll', () => {
     expect(app.state().messages[5].selected).toBe(false)
     expect(app.state().messages[6].selected).toBe(false)
     expect(app.state().messages[7].selected).toBe(false)
+  })
+})
+
+describe('#handleDelete', () => {
+  it('deletes all selected messages', () => {
+
+    const div = document.createElement('div')
+    const app = shallow(<App />, div)
+    app.instance().handleDelete()
+    expect(app.state().messages.length).toBe(4)
+    expect(app.state().messages[0].selected).toBe(false)
+    expect(app.state().messages[1].selected).toBe(false)
+    expect(app.state().messages[2].selected).toBe(false)
+    expect(app.state().messages[3].selected).toBe(false)
+
   })
 })

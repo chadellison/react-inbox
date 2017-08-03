@@ -15,6 +15,7 @@ class App extends Component {
         this.handleSelected = this.handleSelected.bind(this)
         this.handleSelectAll = this.handleSelectAll.bind(this)
         this.handleRead = this.handleRead.bind(this)
+        this.handleDelete = this.handleDelete.bind(this)
     }
 
     handleRead(value) {
@@ -33,11 +34,12 @@ class App extends Component {
     handleSelected(message) {
         let updatedMessages = this.state.messages
 
-        if(!message.selected) {
-            updatedMessages[message.id - 1].selected = true
-        } else {
-          updatedMessages[message.id - 1].selected = false
-        }
+        updatedMessages.forEach((eachMessage) => {
+          if(message === eachMessage) {
+            eachMessage.selected ? eachMessage.selected = false : eachMessage.selected = true
+          }
+        })
+
 
         this.setState({
             messages: updatedMessages
@@ -47,7 +49,12 @@ class App extends Component {
 
     handleStarred(message) {
         let updatedMessages = this.state.messages
-        updatedMessages[message.id - 1].starred = !message.starred
+
+        updatedMessages.forEach((eachMessage) => {
+          if(message === eachMessage) {
+            eachMessage.starred = !message.starred
+          }
+        })
         this.setState({
             message: updatedMessages
         })
@@ -71,6 +78,12 @@ class App extends Component {
       })
     }
 
+    handleDelete() {
+      this.setState({
+        messages: this.state.messages.filter((message) => !message.selected)
+      })
+    }
+
     render() {
         return (
             <div className="App">
@@ -78,6 +91,8 @@ class App extends Component {
                   className="Toolbar"
                   handleSelectAll={this.handleSelectAll}
                   handleRead={this.handleRead}
+                  unReadCount={this.state.messages.filter((message) => !message.read).length}
+                  handleDelete={this.handleDelete}
                 />
                 <Messages messages={this.state.messages} handleStarred={this.handleStarred} handleSelected={this.handleSelected}/>
             </div>
