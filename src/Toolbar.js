@@ -2,6 +2,17 @@ import React, { Component } from 'react';
 
 
 class Toolbar extends Component {
+    get selected() {
+      let selectedMessages = this.props.messages.filter((message) => message.selected)
+
+      if(selectedMessages.length === this.props.messages.length) {
+         return 'check-square-o'
+      } else if(selectedMessages.length === 0) {
+        return 'square-o'
+      } else {
+        return 'minus-square-o'
+      }
+    }
     render() {
         return (<div className="row toolbar">
             <div className="col-md-12">
@@ -11,7 +22,7 @@ class Toolbar extends Component {
                 </p>
 
                 <button onClick={this.props.handleSelectAll} className="btn btn-default">
-                    <i className="fa fa-check-square-o"></i>
+                    <i className={`fa fa-${this.selected}`}></i>
                 </button>
 
                 <button onClick={() => this.props.handleRead(true)} className="btn btn-default">

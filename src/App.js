@@ -40,7 +40,6 @@ class App extends Component {
           }
         })
 
-
         this.setState({
             messages: updatedMessages
         })
@@ -93,6 +92,7 @@ class App extends Component {
                   handleRead={this.handleRead}
                   unReadCount={this.state.messages.filter((message) => !message.read).length}
                   handleDelete={this.handleDelete}
+                  messages={this.state.messages}
                 />
                 <Messages messages={this.state.messages} handleStarred={this.handleStarred} handleSelected={this.handleSelected}/>
             </div>
